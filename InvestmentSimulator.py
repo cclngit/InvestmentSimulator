@@ -108,7 +108,6 @@ class InvestmentSimulator:
                 final_amounts.append(final_amount)
                 total_final_amounts[year] += final_amount
 
-                # Mise à jour des montants investis pour toute modification de salaire
                 salary = self.get_salary_for_year(year)
                 investment["monthly_amount"] = salary * self.savings_rate * investment["allocation_percentage"]
 
@@ -133,18 +132,21 @@ class InvestmentSimulator:
         if duration is None:
             duration = self.duration
 
-        real_rate = self.calculate_real_rate(investment["rate"], investment["fees"])
-        final_amount = investment["initial_amount"] * (1 + real_rate) ** duration
+        final_amount = investment["initial_amount"]
+        monthly_amount = self.salary * self.savings_rate * investment["allocation_percentage"]
 
         for _ in range(duration * 12):
-            final_amount += investment["monthly_amount"] * (1 + real_rate) ** (_ // 12)
+            salary = self.get_salary_for_year(_ // 12)
+            monthly_amount = salary * self.savings_rate * investment["allocation_percentage"]
+            final_amount += monthly_amount * (1 + investment["rate"] - self.inflation_rate) ** (_ // 12)
 
         return final_amount
 
 if __name__ == "__main__":
     
     # Exemple d'utilisation
-    simulator = InvestmentSimulator(duration=10, inflation_rate=6, initial_salary=1500, savings_rate=50)
+    simulator = InvestmentSimulator(duration=100, inflation_rate=6, initial_salary=1500, savings_rate=50)
+    
     simulator.add_investment("Livret A", rate=3, initial_amount=1000, allocation_percentage=30)
     simulator.add_investment("PEA", rate=10, initial_amount=500, allocation_percentage=40, fees=0.5)
     simulator.add_investment("PEL", rate=6, initial_amount=7000, allocation_percentage=30, fees=0.7)
@@ -155,6 +157,7 @@ if __name__ == "__main__":
     
 
     results = simulator.simulate()
+    print(results)
     simulator.plot_investments()
 
     #help(InvestmentSimulator)
