@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 
 class InvestmentSimulator:
-    def __init__(self, duration, inflation_rate, initial_salary, savings_rate, currency="€"):
+    def __init__(self, duration, initial_salary, savings_rate, currency="€"):
         """ This class simulates the evolution of investments over time.
 
         Args:
@@ -12,7 +12,7 @@ class InvestmentSimulator:
             currency (str): The currency of the simulation.
         """
         self.duration = duration
-        self.inflation_rate = inflation_rate / 100
+        self.inflation_rate = 0
         self.salary_changes = [(0, initial_salary)] 
         self.salary = initial_salary
         self.savings_rate = savings_rate / 100
@@ -145,17 +145,11 @@ class InvestmentSimulator:
 if __name__ == "__main__":
     
     # Exemple d'utilisation
-    simulator = InvestmentSimulator(duration=100, inflation_rate=6, initial_salary=1500, savings_rate=50)
+    simulator = InvestmentSimulator(duration=10, initial_salary=3500, savings_rate=40)
     
-    simulator.add_investment("Livret A", rate=3, initial_amount=1000, allocation_percentage=30)
-    simulator.add_investment("PEA", rate=10, initial_amount=500, allocation_percentage=40, fees=0.5)
-    simulator.add_investment("PEL", rate=6, initial_amount=7000, allocation_percentage=30, fees=0.7)
+    simulator.add_investment("PEA", rate=8, initial_amount=10000, allocation_percentage=100, fees=0.6)
 
-    simulator.change_salary(1, 500)
-    simulator.change_salary(5, 3500)
-    simulator.change_salary(7, 100)
     
-
     results = simulator.simulate()
     print(results)
     simulator.plot_investments()

@@ -10,7 +10,7 @@
 <a href="https://bmc.link/MoreThanRobots" target="_blank"><img src="https://img.shields.io/badge/Buy_me_a_coffe-$-blue" /></a>
 </p>
 
-The Investment Simulator is a Python class that allows you to simulate the evolution of investments over time. It takes into account factors such as inflation rate, salary changes, investment rates, and fees to provide a realistic projection of investment growth.
+The Investment Simulator is a Python class that allows you to simulate the evolution of investments over time. It takes into account factors such as salary changes, investment rates, and fees to provide a realistic projection of investment growth.
 
 ## Installation
 
@@ -25,7 +25,6 @@ simulator = InvestmentSimulator(duration, inflation_rate, initial_salary, saving
 ```
 
 - `duration` (int): The duration of the simulation in years.
-- `inflation_rate` (float): The inflation rate in percent.
 - `initial_salary` (float): The initial salary in euros/usd.
 - `savings_rate` (float): The percentage of the salary that is saved each month.
 - `currency` (str): The currency of the simulation.
@@ -72,7 +71,7 @@ This will generate a plot showing the evolution of each investment, as well as t
 Here's an example of how to use the Investment Simulator:
 
 ```python
-simulator = InvestmentSimulator(duration=20, inflation_rate=2, initial_salary=2000, savings_rate=40)
+simulator = InvestmentSimulator(duration=20, initial_salary=2000, savings_rate=40)
 
 simulator.add_investment("Stocks", rate=8, initial_amount=5000, allocation_percentage=50)
 simulator.add_investment("Bonds", rate=4, initial_amount=3000, allocation_percentage=30)
