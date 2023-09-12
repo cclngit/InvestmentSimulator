@@ -145,13 +145,14 @@ class InvestmentSimulator:
 if __name__ == "__main__":
     
     # Exemple d'utilisation
-    simulator = InvestmentSimulator(duration=10, initial_salary=3500, savings_rate=40)
-    
-    simulator.add_investment("PEA", rate=8, initial_amount=10000, allocation_percentage=100, fees=0.6)
+    simulator = InvestmentSimulator(duration=20, initial_salary=2000, savings_rate=40)
 
-    
+    simulator.add_investment("Stocks", rate=8, initial_amount=5000, allocation_percentage=50)
+    simulator.add_investment("Bonds", rate=4, initial_amount=3000, allocation_percentage=30)
+    simulator.add_investment("Real Estate", rate=6, initial_amount=10000, allocation_percentage=20)
+
     results = simulator.simulate()
-    print(results)
-    simulator.plot_investments()
 
-    #help(InvestmentSimulator)
+    print(results)
+
+    simulator.plot_investments()
